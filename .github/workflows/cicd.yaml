@@ -1,0 +1,29 @@
+name: Ruby CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ruby-version: ['3.0']
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby ${{ matrix.ruby-version }}
+        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+      - name: APT Update and Install libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxslt-dev libxml2-dev build-essential
+      - name: Install dependencies
+        run: bundle config build.nokogiri --use-system-libraries && bundle install
+      - name: Run Android tests
+        run: rake android_browserstack

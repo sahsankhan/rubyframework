@@ -1,0 +1,11 @@
+[caps]
+platformName = 'Android'
+platformVersion = '11'
+deviceName = 'infinix'
+app = '/Users/syedzubairalam/Desktop/ruby-cucumber-appium/appium-cucumber-ruby/lineup.apk'
+automationName = 'UiAutomator2'
+
+[appium_lib]
+server_url = "http://localhost:4723/wd/hub"
+wait = 20
+newCommandTimeout = 60
